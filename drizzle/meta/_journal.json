@@ -8,6 +8,13 @@
       "when": 1733227892157,
       "tag": "0000_stormy_master_mold",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1733235826003,
+      "tag": "0001_slim_rocket_raccoon",
+      "breakpoints": true
     }
   ]
 }
