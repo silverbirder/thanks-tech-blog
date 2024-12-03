@@ -19,9 +19,14 @@ import { useCallback } from "react";
 import { api } from "@/trpc/react";
 
 const FormSchema = z.object({
-  url: z.string().min(1, {
-    message: "技術ブログURLを入力してね",
-  }),
+  url: z
+    .string()
+    .min(1, {
+      message: "かならず入力してね",
+    })
+    .url({
+      message: "URLの形式で入力してね",
+    }),
   comment: z.string().optional(),
 });
 
@@ -33,8 +38,11 @@ export const Top = () => {
       comment: "",
     },
   });
-  const { mutate: createTechBlogComment, isSuccess } =
-    api.techBlog.create.useMutation();
+  const {
+    mutate: createTechBlogComment,
+    isSuccess,
+    isPending,
+  } = api.techBlog.create.useMutation();
 
   const onSubmit = useCallback(
     (data: z.infer<typeof FormSchema>) => {
@@ -64,7 +72,6 @@ export const Top = () => {
                   <Input
                     id="blogUrl"
                     placeholder="https://example.com/tech-blog/article"
-                    required
                     {...field}
                   />
                 </FormControl>
@@ -82,7 +89,6 @@ export const Top = () => {
                   <Textarea
                     id="message"
                     placeholder="著者へのメッセージをここに書いてください..."
-                    required
                     {...field}
                   />
                 </FormControl>
@@ -96,7 +102,7 @@ export const Top = () => {
         form="form"
         type="submit"
         className="mx-auto w-full md:w-auto"
-        disabled={isSuccess}
+        disabled={isSuccess || isPending}
       >
         <Send className="mr-2" />
         {isSuccess ? "感謝を送りました！" : "感謝を送る！"}
