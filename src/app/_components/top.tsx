@@ -1,41 +1,105 @@
+"use client";
+
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-// import { api } from "@/trpc/react";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { useCallback } from "react";
+import { api } from "@/trpc/react";
+
+const FormSchema = z.object({
+  url: z.string().min(1, {
+    message: "技術ブログURLを入力してね",
+  }),
+  comment: z.string().optional(),
+});
 
 export const Top = () => {
-  // const createTechBlogComment = api.techBlog.create.useMutation({
-  //   onSuccess: () => {
-  //     return;
-  //   },
-  // });
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      url: "",
+      comment: "",
+    },
+  });
+  const { mutate: createTechBlogComment, isSuccess } =
+    api.techBlog.create.useMutation();
+
+  const onSubmit = useCallback(
+    (data: z.infer<typeof FormSchema>) => {
+      createTechBlogComment({
+        ...data,
+      });
+    },
+    [createTechBlogComment],
+  );
 
   return (
     <section className="item-center m-6 flex w-full flex-col justify-center space-y-6 md:max-w-2xl">
       <h2 className="text-2xl font-bold">著者に感謝を伝える</h2>
-      <form className="space-y-4" id="form">
-        <div className="space-y-2">
-          <Label htmlFor="blogUrl">技術ブログURL</Label>
-          <Input
-            id="blogUrl"
-            placeholder="https://example.com/tech-blog/article"
-            required
+      <Form {...form}>
+        <form
+          className="space-y-4"
+          id="form"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <FormField
+            control={form.control}
+            name="url"
+            render={({ field }) => (
+              <FormItem className="space-y-2">
+                <FormLabel htmlFor="blogUrl">技術ブログURL</FormLabel>
+                <FormControl>
+                  <Input
+                    id="blogUrl"
+                    placeholder="https://example.com/tech-blog/article"
+                    required
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="message">メッセージ</Label>
-          <Textarea
-            id="message"
-            placeholder="著者へのメッセージをここに書いてください..."
-            required
+          <FormField
+            control={form.control}
+            name="comment"
+            render={({ field }) => (
+              <FormItem className="space-y-2">
+                <FormLabel htmlFor="message">メッセージ</FormLabel>
+                <FormControl>
+                  <Textarea
+                    id="message"
+                    placeholder="著者へのメッセージをここに書いてください..."
+                    required
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-      </form>
-      <Button form="form" type="submit" className="mx-auto w-full md:w-auto">
+        </form>
+      </Form>
+      <Button
+        form="form"
+        type="submit"
+        className="mx-auto w-full md:w-auto"
+        disabled={isSuccess}
+      >
         <Send className="mr-2" />
-        感謝を送る！
+        {isSuccess ? "感謝を送りました！" : "感謝を送る！"}
       </Button>
     </section>
   );
