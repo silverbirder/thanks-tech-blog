@@ -7,9 +7,7 @@ export default async function Page() {
 
   return (
     // <HydrateClient>
-    <main className="flex w-full max-w-2xl flex-grow items-center justify-center">
-      <Top />
-    </main>
+    <Top />
     // </HydrateClient>
   );
 }

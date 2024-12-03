@@ -27,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="ja" className={clsx(noto.className, "h-full")}>
       <body className="flex min-h-screen flex-col items-center justify-center">
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <main className="flex w-full max-w-2xl flex-grow items-start justify-center">
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+        </main>
         <Footer />
         {process.env.GA_ID && <GoogleAnalytics gaId={process.env.GA_ID} />}
       </body>
