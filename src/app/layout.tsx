@@ -5,6 +5,8 @@ import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { clsx } from "clsx";
+import { Footer } from "@/app/_components/footer";
 
 export const metadata: Metadata = {
   title: "ありがとう、技術ブログ",
@@ -23,9 +25,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ja" className={noto.className}>
-      <body>
+    <html lang="ja" className={clsx(noto.className, "h-full")}>
+      <body className="flex min-h-screen flex-col items-center justify-center">
         <TRPCReactProvider>{children}</TRPCReactProvider>
+        <Footer />
         {process.env.GA_ID && <GoogleAnalytics gaId={process.env.GA_ID} />}
       </body>
     </html>
