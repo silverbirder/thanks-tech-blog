@@ -1,0 +1,1 @@
+ALTER TABLE "thanks-tech-blog_technical-blog" ADD COLUMN "handle_name" varchar(128);

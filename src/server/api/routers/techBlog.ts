@@ -9,6 +9,7 @@ export const techBlogRouter = createTRPCRouter({
       z.object({
         url: z.string().url().min(1),
         comment: z.string().min(1),
+        handleName: z.string(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -17,6 +18,7 @@ export const techBlogRouter = createTRPCRouter({
         url: input.url,
         hash: hash,
         comment: input.comment,
+        handleName: input.handleName,
         status: "in_progress",
       });
       return { hash };

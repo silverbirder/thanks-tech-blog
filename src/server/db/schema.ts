@@ -32,6 +32,7 @@ export const technicalBlogs = createTable(
     id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
     hash: varchar("hash", { length: 256 }).notNull(),
     url: varchar("url", { length: 2048 }).notNull(),
+    handleName: varchar("handle_name", { length: 128 }),
     comment: text("comment").notNull(),
     status: blogStatusEnum("status").default("in_progress").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })

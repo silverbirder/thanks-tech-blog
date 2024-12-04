@@ -15,9 +15,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 const FormSchema = z.object({
   url: z
@@ -31,15 +33,18 @@ const FormSchema = z.object({
   comment: z.string().min(1, {
     message: "入力してね",
   }),
+  handleName: z.string(),
 });
 
 export const Top = () => {
   const router = useRouter();
+  const [isAnonymous, setIsAnonymous] = useState(true);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       url: "",
       comment: "",
+      handleName: "",
     },
   });
   const {
@@ -109,6 +114,35 @@ export const Top = () => {
               </FormItem>
             )}
           />
+          <div className="item-start flex flex-col space-y-2">
+            <div className="flex items-center space-x-2">
+              <Switch
+                id="anonymous"
+                checked={isAnonymous}
+                onCheckedChange={setIsAnonymous}
+              />
+              <Label htmlFor="anonymous">匿名で送信する</Label>
+            </div>
+            {!isAnonymous && (
+              <FormField
+                control={form.control}
+                name="handleName"
+                render={({ field }) => (
+                  <FormItem className="space-y-2">
+                    <FormLabel htmlFor="handleName">ハンドルネーム</FormLabel>
+                    <FormControl>
+                      <Input
+                        id="handleName"
+                        placeholder="あなたのハンドルネームを入力してください"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+          </div>
         </form>
       </Form>
       <Button
