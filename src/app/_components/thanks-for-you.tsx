@@ -13,7 +13,15 @@ type Props = {
 export const ThanksForYou = ({ blog }: Props) => {
   return (
     <section className="m-6 flex w-full flex-col items-center justify-center space-y-6 md:max-w-2xl">
-      <h2 className="text-center text-3xl font-bold">ありがとう、技術ブログ</h2>
+      <h2 className="text-2xl font-bold">ありがとう、技術ブログ</h2>
+      <MessageLetter blog={blog} />
+    </section>
+  );
+};
+
+export const MessageLetter = ({ blog }: Props) => {
+  return (
+    <>
       <Card className="w-full">
         <CardHeader>
           <CardTitle className="text-center text-xl font-semibold">
@@ -24,7 +32,8 @@ export const ThanksForYou = ({ blog }: Props) => {
           <div className="flex items-center space-x-2">
             <Badge variant="secondary">From</Badge>
             <span className="font-medium">
-              {blog.handleName ?? "匿名の読者"}
+              {blog.handleName && blog.handleName}
+              {!blog.handleName && "匿名の読者"}
             </span>
           </div>
           <div className="text-muted-foreground flex items-center space-x-2 text-sm">
@@ -57,6 +66,6 @@ export const ThanksForYou = ({ blog }: Props) => {
         このメッセージは、あなたの技術ブログが読者に与えた影響の証です。
         これからも素晴らしい記事を書き続けてください。
       </p>
-    </section>
+    </>
   );
 };
