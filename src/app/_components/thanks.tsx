@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import bird from "./bird.json";
+import Link from "next/link";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 };
 
 export const Thanks = ({ hash }: Props) => {
-  console.log({ hash });
+  const messagePath = `/${hash}`;
   return (
     <section className="item-center m-6 flex w-full flex-col justify-center space-y-6 md:max-w-2xl">
       <h2 className="text-2xl font-bold">ありがとう、技術ブログ</h2>
@@ -23,7 +24,14 @@ export const Thanks = ({ hash }: Props) => {
             あなたの感謝の気持ちを受け付けました。
           </p>
           <p className="text-gray-600">
-            入力された情報を確認の上、著者に伝えさせていただきます。
+            入力された情報を確認の上、
+            <Link
+              href={messagePath}
+              className="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline"
+            >
+              こちらのリンク
+            </Link>
+            を著者に伝えさせていただきます。
           </p>
         </div>
       </div>
