@@ -12,7 +12,7 @@ type Props = {
 
 export const ThanksForYou = ({ blog }: Props) => {
   return (
-    <section className="m-6 flex w-full flex-col items-center justify-center space-y-6 md:max-w-2xl">
+    <section className="item-center m-6 flex w-full flex-col justify-center space-y-6 md:max-w-2xl">
       <h2 className="text-2xl font-bold">ありがとう、技術ブログ</h2>
       <MessageLetter blog={blog} />
     </section>
