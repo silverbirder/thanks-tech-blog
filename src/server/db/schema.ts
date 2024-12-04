@@ -30,6 +30,7 @@ export const technicalBlogs = createTable(
   "technical-blog",
   {
     id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+    hash: varchar("hash", { length: 256 }).notNull(),
     url: varchar("url", { length: 2048 }).notNull(),
     comment: text("comment").notNull(),
     status: blogStatusEnum("status").default("in_progress").notNull(),
