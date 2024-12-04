@@ -1,0 +1,1 @@
+ALTER TABLE "thanks-tech-blog_technical-blog" ALTER COLUMN "comment" SET NOT NULL;

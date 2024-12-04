@@ -31,7 +31,7 @@ export const technicalBlogs = createTable(
   {
     id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
     url: varchar("url", { length: 2048 }).notNull(),
-    comment: text("comment"),
+    comment: text("comment").notNull(),
     status: blogStatusEnum("status").default("in_progress").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)

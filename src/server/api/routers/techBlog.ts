@@ -8,13 +8,13 @@ export const techBlogRouter = createTRPCRouter({
     .input(
       z.object({
         url: z.string().url().min(1),
-        comment: z.string().optional(),
+        comment: z.string().min(1),
       }),
     )
     .mutation(async ({ ctx, input }) => {
       await ctx.db.insert(technicalBlogs).values({
         url: input.url,
-        comment: input.comment ?? null,
+        comment: input.comment,
         status: "in_progress",
       });
     }),

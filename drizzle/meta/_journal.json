@@ -15,6 +15,13 @@
       "when": 1733235826003,
       "tag": "0001_slim_rocket_raccoon",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1733278397530,
+      "tag": "0002_handy_black_bird",
+      "breakpoints": true
     }
   ]
 }
