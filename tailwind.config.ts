@@ -29,10 +29,7 @@ export default {
         primary: createColor(HUE, 85),
         secondary: createColor(HUE, 95),
         muted: createColor(HUE, 75),
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
+        accent: createColor(HUE, 45),
         destructive: createColor(DESTRUCTIVE_HUE, 85),
         border: `hsl(${HUE}, 25%, 45%)`,
         input: `hsl(${HUE}, 35%, 55%)`,
