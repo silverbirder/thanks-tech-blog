@@ -22,7 +22,7 @@ export const ThanksForYou = ({ blog }: Props) => {
 export const MessageLetter = ({ blog }: Props) => {
   return (
     <>
-      <Card className="w-full">
+      <Card className="w-full glitter-border shadow-md">
         <CardHeader>
           <CardTitle className="text-center text-xl font-semibold">
             感謝のメッセージ
