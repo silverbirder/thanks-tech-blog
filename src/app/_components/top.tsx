@@ -79,7 +79,7 @@ export const Top = () => {
           <MessageLetter blog={form.getValues()} />
         ) : (
           <>
-            <div className="text-gray-600">
+            <div className="text-foreground">
               <p>技術ブログに助けられたことはありませんか？</p>
               <p>
                 このサービスを通じて、ありがとうの気持ちを著者に届けることができます。
@@ -162,7 +162,7 @@ export const Top = () => {
         )}
       </div>
       <div className="flex space-x-4">
-        <Button onClick={togglePreview} className="w-2/4" variant="secondary">
+        <Button onClick={togglePreview} className="w-2/4" variant="outline">
           {preview ? (
             <>
               <Edit className="mr-2" />

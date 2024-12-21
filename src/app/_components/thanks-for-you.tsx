@@ -36,33 +36,32 @@ export const MessageLetter = ({ blog }: Props) => {
               {!blog.handleName && "匿名の読者"}
             </span>
           </div>
-          <div className="text-muted-foreground flex items-center space-x-2 text-sm">
+          <a
+            href={blog.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-link hover:text-link-hover flex items-center gap-2 break-all hover:underline"
+          >
             <ExternalLink size={16} />
-            <a
-              href={blog.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="break-all hover:underline"
-            >
-              {blog.url}
-            </a>
-          </div>
+            {blog.url}
+          </a>
+
           <div className="relative pb-4 pt-4">
             <Quote
-              className="text-muted-foreground/20 absolute left-0 top-0"
+              className="absolute left-0 top-0 text-muted-foreground/20"
               size={24}
             />
-            <p className="text-muted-foreground pl-8 pr-8 italic">
+            <p className="pl-8 pr-8 italic text-muted-foreground">
               {blog.comment}
             </p>
             <Quote
-              className="text-muted-foreground/20 absolute bottom-0 right-0 rotate-180"
+              className="absolute bottom-0 right-0 rotate-180 text-muted-foreground/20"
               size={24}
             />
           </div>
         </CardContent>
       </Card>
-      <p className="text-muted-foreground text-sm">
+      <p className="text-sm text-muted-foreground">
         このメッセージは、あなたの技術ブログが読者に与えた影響の証です。
         これからも素晴らしい記事を書き続けてください。
       </p>
