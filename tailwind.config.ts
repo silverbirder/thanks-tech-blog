@@ -16,8 +16,8 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        background: `hsl(${HUE}, 85%, 95%)`,
-        foreground: `hsl(${HUE}, 85%, 5%)`,
+        background: `hsl(${HUE}, 85%, 98%)`,
+        foreground: `hsl(${HUE}, 85%, 2%)`,
         card: {
           DEFAULT: `hsl(${HUE}, 85%, 95%)`,
           foreground: `hsl(${HUE}, 85%, 5%)`,
